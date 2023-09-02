@@ -1,0 +1,15 @@
+C:\Juan Ruiz\Taller de lenguajes 2\tl2-tp1-2023-Juanruizkk\Sistema Cadeteria\Sistema Cadeteria\bin\Debug\net6.0\Sistema Cadeteria.exe
+C:\Juan Ruiz\Taller de lenguajes 2\tl2-tp1-2023-Juanruizkk\Sistema Cadeteria\Sistema Cadeteria\bin\Debug\net6.0\Sistema Cadeteria.deps.json
+C:\Juan Ruiz\Taller de lenguajes 2\tl2-tp1-2023-Juanruizkk\Sistema Cadeteria\Sistema Cadeteria\bin\Debug\net6.0\Sistema Cadeteria.runtimeconfig.json
+C:\Juan Ruiz\Taller de lenguajes 2\tl2-tp1-2023-Juanruizkk\Sistema Cadeteria\Sistema Cadeteria\bin\Debug\net6.0\Sistema Cadeteria.dll
+C:\Juan Ruiz\Taller de lenguajes 2\tl2-tp1-2023-Juanruizkk\Sistema Cadeteria\Sistema Cadeteria\bin\Debug\net6.0\Sistema Cadeteria.pdb
+C:\Juan Ruiz\Taller de lenguajes 2\tl2-tp1-2023-Juanruizkk\Sistema Cadeteria\Sistema Cadeteria\obj\Debug\net6.0\Sistema Cadeteria.csproj.AssemblyReference.cache
+C:\Juan Ruiz\Taller de lenguajes 2\tl2-tp1-2023-Juanruizkk\Sistema Cadeteria\Sistema Cadeteria\obj\Debug\net6.0\Sistema Cadeteria.GeneratedMSBuildEditorConfig.editorconfig
+C:\Juan Ruiz\Taller de lenguajes 2\tl2-tp1-2023-Juanruizkk\Sistema Cadeteria\Sistema Cadeteria\obj\Debug\net6.0\Sistema Cadeteria.AssemblyInfoInputs.cache
+C:\Juan Ruiz\Taller de lenguajes 2\tl2-tp1-2023-Juanruizkk\Sistema Cadeteria\Sistema Cadeteria\obj\Debug\net6.0\Sistema Cadeteria.AssemblyInfo.cs
+C:\Juan Ruiz\Taller de lenguajes 2\tl2-tp1-2023-Juanruizkk\Sistema Cadeteria\Sistema Cadeteria\obj\Debug\net6.0\Sistema Cadeteria.csproj.CoreCompileInputs.cache
+C:\Juan Ruiz\Taller de lenguajes 2\tl2-tp1-2023-Juanruizkk\Sistema Cadeteria\Sistema Cadeteria\obj\Debug\net6.0\Sistema Cadeteria.dll
+C:\Juan Ruiz\Taller de lenguajes 2\tl2-tp1-2023-Juanruizkk\Sistema Cadeteria\Sistema Cadeteria\obj\Debug\net6.0\refint\Sistema Cadeteria.dll
+C:\Juan Ruiz\Taller de lenguajes 2\tl2-tp1-2023-Juanruizkk\Sistema Cadeteria\Sistema Cadeteria\obj\Debug\net6.0\Sistema Cadeteria.pdb
+C:\Juan Ruiz\Taller de lenguajes 2\tl2-tp1-2023-Juanruizkk\Sistema Cadeteria\Sistema Cadeteria\obj\Debug\net6.0\Sistema Cadeteria.genruntimeconfig.cache
+C:\Juan Ruiz\Taller de lenguajes 2\tl2-tp1-2023-Juanruizkk\Sistema Cadeteria\Sistema Cadeteria\obj\Debug\net6.0\ref\Sistema Cadeteria.dll

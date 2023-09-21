@@ -5,7 +5,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Sistema_Cadeteria</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+   <!--  <Nullable>enable</Nullable> -->
   </PropertyGroup>
 
 </Project>

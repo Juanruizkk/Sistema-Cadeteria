@@ -1,12 +1,20 @@
 namespace EspacioCadeteria;
 using System.IO;
 using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
-public class accesoADatos
+public abstract class AccesoADatos
 {
-    public List<Cadete> cargarCadetesAListado(string path)
-    {
+    public abstract List<Cadete> CargarCadetes(string path);
+    public abstract Cadeteria CargarDatosCadeteria(string path);
 
+}
+
+public class AccesoCSV : AccesoADatos
+{
+    public override List<Cadete> CargarCadetes(string path)
+    {
         List<Cadete> listadoCadetes = new List<Cadete>();
         string pathArchivo = path;
         StreamReader str = new StreamReader(pathArchivo);
@@ -30,8 +38,7 @@ public class accesoADatos
         }
         return listadoCadetes;
     }
-
-    public Cadeteria cargarDatosCadeteria(string path)
+    public override Cadeteria CargarDatosCadeteria(string path)
     {
         string pathArchivo = path;
         pathArchivo = Path.Combine(pathArchivo, "Cadeteria.csv");
@@ -50,13 +57,30 @@ public class accesoADatos
             string nombre = fila[0];
             double telefono = Convert.ToDouble(fila[1]);
 
-            listadoCad = cargarCadetesAListado(Path.Combine(path, "cadetes.csv"));
+            listadoCad = CargarCadetes(Path.Combine(path, "cadetes.csv"));
 
             nuevaCadeteria = new Cadeteria(nombre, telefono, listadoCad);
 
 
         }
         return nuevaCadeteria;
+    }
+}
 
+public class AccesoJson : AccesoADatos
+{
+    public override List<Cadete> CargarCadetes(string path)
+    {
+        string cadetesPath = Path.Combine(path, "cadetes.json");
+        string cadetesJson = File.ReadAllText(cadetesPath);
+        List<Cadete> listaCadetes = JsonSerializer.Deserialize<List<Cadete>>(cadetesJson);
+        return listaCadetes;
+    }
+    public override Cadeteria CargarDatosCadeteria(string path)
+    {
+        string json = File.ReadAllText(Path.Combine(path, "Cadeteria.json"));
+        Cadeteria nuevaCadeteria = JsonSerializer.Deserialize<Cadeteria>(json);
+        nuevaCadeteria.ListadoCadetes = CargarCadetes(path);
+        return nuevaCadeteria;
     }
 }

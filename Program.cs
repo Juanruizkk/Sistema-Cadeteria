@@ -3,31 +3,54 @@ using System.IO;
 using System;
 using System.Security.Cryptography.X509Certificates;
 using System.ComponentModel;
+using System.Threading.Tasks.Dataflow;
+Console.WriteLine("------  Bienvenido al sistema  ------");
 
-accesoADatos cargarDatos = new accesoADatos();
+Console.WriteLine("Como desea cargar los datos de la cadeteria: (1- Archivo csv. 2- Archivo Json)");
+AccesoADatos cargar;
+switch (int.Parse(Console.ReadLine()))
+{
+    case 1:
+        cargar = new AccesoCSV();
+        break;
+    case 2:
+        cargar = new AccesoJson();
+        break;
+    default:
+        cargar = null;
+        break;
+}
+
 string path = @"C:\Juan Ruiz\Taller de lenguajes 2\tl2-tp1-2023-Juanruizkk\Sistema Cadeteria";
 
-Cadeteria cadeteriaPEPE = cargarDatos.cargarDatosCadeteria(path);
+Cadeteria cadeteriaPEPE = cargar.CargarDatosCadeteria(path);
 
-Console.WriteLine("------  Bienvenido al sistema  ------");
+
 
 Console.WriteLine("Ingrese que operacion desea realizar: ");
 
-Console.Write(@"1 - Dar de alta un Pedido y asignarle a un nuevo Cadete
-2- Cambiar estado de un Pedido
-3- Reasignar un Pedido
-4- Salir del sistema");
+Console.Write(@"1 - Dar de alta un Pedido 
+2- Asignarle a un nuevo Cadete
+3- Cambiar estado de un Pedido
+4- Reasignar un Pedido
+5- Ver Jornal a cobrar de un Cadete
+6- Salir del sistema");
+
 
 
 int op = int.Parse(Console.ReadLine());
 do
 {
+
     Cliente nuevoCliente = null;
     switch (op)
     {
         case 1:
             Console.WriteLine("Para crear un pedido debe crear un cliente primero");
-
+            string nombreCliente;
+            string direccionCliente;
+            double telefonoCliente;
+            string observacionCliente;
             do
             {
                 Console.WriteLine(@"Ingrese los datos del cliente separados por ','. Nombre, Direccion, Telefono, Observacion");
@@ -37,11 +60,11 @@ do
 
                 if (separado.Length == 4)
                 {
-                    string nombre = separado[0].Trim();
-                    string direccion = separado[1].Trim();
-                    double telefono = double.Parse(separado[2].Trim());
-                    string observacion = separado[3].Trim();
-                    nuevoCliente = cadeteriaPEPE.crearCliente(nombre, direccion, telefono, observacion);
+                    nombreCliente = separado[0].Trim();
+                    direccionCliente = separado[1].Trim();
+                    telefonoCliente = double.Parse(separado[2].Trim());
+                    observacionCliente = separado[3].Trim();
+                    nuevoCliente = cadeteriaPEPE.CrearCliente(nombreCliente, direccionCliente, telefonoCliente, observacionCliente);
                     break;
                 }
                 else
@@ -73,16 +96,21 @@ do
                     estado = Estado.EnPreparacion;
                     break;
             }
-            Pedido nuevoPedido = cadeteriaPEPE.crearPedido(numero, obs, nuevoCliente, estado);
+            cadeteriaPEPE.CrearPedido(numero, obs, nuevoCliente, estado, nombreCliente, direccionCliente, telefonoCliente, observacionCliente);
+
+            break;
+        case 2:
             Console.WriteLine("Ingrese el id del cadete");
             int idCadete = int.Parse(Console.ReadLine());
+            Console.WriteLine("Ingrese el numero del pedido");
+            int num = int.Parse(Console.ReadLine());
 
-            cadeteriaPEPE.asignarPedidoACadete(idCadete, nuevoPedido);
+            cadeteriaPEPE.AsignarCadeteAPedido(idCadete, num);
 
             Console.WriteLine("Pedido Cargado con Exito");
             break;
-        case 2:
-            Console.WriteLine("Ingrese el numero del pedido que desea reasignar");
+        case 3:
+            Console.WriteLine("Ingrese el numero del pedido que desea cambiar su estado");
             int numPedido = int.Parse(Console.ReadLine());
             Console.WriteLine("Ingrese el nuevo estado del Pedido (1- En Camino, 2- Entregado, 3- En Preparacion)");
             int eleccionEstado = int.Parse(Console.ReadLine());
@@ -100,34 +128,35 @@ do
                     break;
             }
 
-            cadeteriaPEPE.cambiarEstadoPedido(numPedido, estadoACambiar);
+            cadeteriaPEPE.CambiarEstadoPedido(numPedido, estadoACambiar);
             Console.WriteLine("Estado Cambiado con Exito");
             break;
-        case 3:
+        case 4:
             Console.WriteLine("Ingrese numero del pedido que desea reasignar");
-            int num = int.Parse(Console.ReadLine());
+            int numPed = int.Parse(Console.ReadLine());
             Console.WriteLine("Ingrese el id del cadete al que desea reasignar el pedido");
             int idCadAAsignar = int.Parse(Console.ReadLine());
-
-            Cadete cadeteAAsignar = cadeteriaPEPE.encontrarCadete(idCadAAsignar);
-
-            Console.WriteLine("Ingrese el id del cadete al que desea remover el pedido");
-            int idCadAremover = int.Parse(Console.ReadLine());
-            Cadete cadeteARemover = cadeteriaPEPE.encontrarCadete(idCadAremover);
-
-
-
-            cadeteriaPEPE.reasignarPedido(cadeteAAsignar, cadeteARemover, num);
+            cadeteriaPEPE.reasignarPedido(numPed, idCadAAsignar);
+            Console.WriteLine("Pedido reasignado con exito");
+            break;
+        case 5:
+            Console.WriteLine("Ingrese el id del cadete que desea ver cuanto cobrara");
+            int idCadAVerJornal = int.Parse(Console.ReadLine());
+            Console.WriteLine("El cadete cobrara {0}:", cadeteriaPEPE.JornalACobrar(idCadAVerJornal));
             break;
 
 
     }
     Console.WriteLine("Ingrese que operacion desea realizar: ");
 
-    Console.Write(@"1 - Dar de alta un Pedido y asignarle a un nuevo Cadete
-2- Cambiar estado de un Pedido
-3- Reasignar un Pedido
-4- Salir del sistema");
+    Console.Write(@"1 - Dar de alta un Pedido 
+2- Asignarle a un nuevo Cadete
+3- Cambiar estado de un Pedido
+4- Reasignar un Pedido
+5- Ver Jornal a cobrar de un Cadete
+6- Salir del sistema");
 
     op = int.Parse(Console.ReadLine());
-} while (op != 4);
+} while (op != 6);
+
+/* cadeteriaPEPE.GenerarInforme(path); */
